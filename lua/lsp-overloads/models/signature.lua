@@ -213,6 +213,7 @@ local function open_floating_preview(contents, syntax, opts)
   if existing_winnr and api.nvim_win_is_valid(existing_winnr) then
     floating_winnr = existing_winnr
     floating_bufnr = vim.api.nvim_win_get_buf(floating_winnr)
+    vim.bo[floating_bufnr].modifiable = true
     modifying = true
   end
 
@@ -284,6 +285,7 @@ local function open_floating_preview(contents, syntax, opts)
   end
   api.nvim_buf_set_var(bufnr, 'lsp_floating_preview', floating_winnr)
 
+  vim.bo[floating_bufnr].modifiable = false
   return floating_bufnr, floating_winnr
 end
 
