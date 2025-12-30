@@ -117,22 +117,24 @@ M.open_signature = function(clients, bypass_trigger)
       0,
       "textDocument/signatureHelp",
       params,
-      vim.lsp.with(M.signature_handler, {
-        border = settings.current.ui.border,
-        silent = settings.current.ui.silent,
-        height = settings.current.ui.height,
-        width = settings.current.ui.width,
-        wrap = settings.current.ui.wrap,
-        wrap_at = settings.current.ui.wrap_at,
-        max_width = settings.current.ui.max_width,
-        max_height = settings.current.ui.max_height,
-        focusable = settings.current.ui.focusable,
-        focus = settings.current.ui.focus,
-        offset_x = settings.current.ui.offset_x,
-        offset_y = settings.current.ui.offset_y,
-        close_events = settings.current.ui.close_events,
-        floating_window_above_cur_line = settings.current.ui.floating_window_above_cur_line,
-      })
+      function(err, result, ctx)
+        return M.signature_handler(err, result, ctx, {
+          border = settings.current.ui.border,
+          silent = settings.current.ui.silent,
+          height = settings.current.ui.height,
+          width = settings.current.ui.width,
+          wrap = settings.current.ui.wrap,
+          wrap_at = settings.current.ui.wrap_at,
+          max_width = settings.current.ui.max_width,
+          max_height = settings.current.ui.max_height,
+          focusable = settings.current.ui.focusable,
+          focus = settings.current.ui.focus,
+          offset_x = settings.current.ui.offset_x,
+          offset_y = settings.current.ui.offset_y,
+          close_events = settings.current.ui.close_events,
+          floating_window_above_cur_line = settings.current.ui.floating_window_above_cur_line,
+        })
+      end
     )
   else
     if M.curent_signature then
